@@ -1,19 +1,5 @@
-1714353984779 : /about New Req Received
-1714353985883 : /favicon.ico New Req Received
-1714354039088 : /about New Req Received
-1714354048415 : / New Req Received
-1714354070521 : /about?myName=Abhishek&s=23 New Req Received
-1714354095898 : / New Req Received
-1714354777814 : / New Req Received
-1714354782831 : /about New Req Received
-1714354806279 : / New Req Received
-1714354887748 : /about New Req Received
-1714354895840 : /about?myName=Abhishek&s=23 New Req Received
-1714354941486 : /about?myName=Abhishek&s=23 New Req Received
-1714430927291 : /about?myName=Abhishek&s=23 New Req Received
-1714430972818 : /about?myName=Abhishek&s=23 New Req Received
-1714431163955 : /about?myName=Abhishek&s=23 New Req Received
-1714431193977 : /about?myName=Abhishek&userId=101 New Req Received
-1714431239574 : /about?myName=Abhishek&userId=101 New Req Received
-1714431250018 : /about?myName=Abhishek&userId=101 New Req Received
-1714432112808 : / New Req Received
+1714432809389 : GET / New Req Received
+1714433158402 : GET / New Req Received
+1714433164540 : GET /signup New Req Received
+1714433208855 : GET /signup New Req Received
+1714433209953 : GET /signup New Req Received
