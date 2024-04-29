@@ -1,0 +1,13 @@
+# EXPRESS
+
+Q.) Why Express Needed?
+
+-->  To create a web application server.
+-->  I have to create each route for each case.
+-->  I have to handle HTTP methods differently.
+-->  I have to manage each things separately
+
+Q.) What is the main purpose of Express?
+
+-->  It provides a minimal and flexible Node.js web application framework that can be used to build single-page applications, as well as
+--> It helps in creating web applications by providing a simple, fast, and flexible Node.js web application framework with a minimalist API that provides
