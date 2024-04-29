@@ -1,0 +1,11 @@
+# HTTP Methods
+
+GET - When you want to get some data from the server
+
+POST - When you want to send and mutate some data in server
+
+PUT - To send image or file the server.
+
+PATCH - When ypu want to change some data in server.
+
+DELETE - When you want to delete some data from the server.
