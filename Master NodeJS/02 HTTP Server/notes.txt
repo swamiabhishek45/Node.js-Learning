@@ -1,0 +1,14 @@
+// Version
+
+^4.18.2
+
+First Part --> 4   // Major and Breaking update 
+Second part --> 18 // Recommended Bug Fix
+Third Part --> 1   // Optional or minor Changes
+
+
+^ ---> install all Recommended and Minor fixex automatically.
+
+~ ---> install only recommended fixes (not including optional ones)
+
+* ---> install only important changes, but not recommended/minor fixes.
