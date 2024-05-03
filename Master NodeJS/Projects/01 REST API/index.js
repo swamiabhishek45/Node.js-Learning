@@ -39,10 +39,10 @@ app.route("/api/users/:id")
     .patch((req, res) => {
         // Update an existing User
         const body = req.body;
-        users.push({...body });
+        users.push({ ...body });
 
         fs.writeFile("./MOCK_DATA.json", JSON.stringify(users), (err, data) => {
-            res.json({ status: "Updated", id: users.id});
+            res.json({ status: "Updated", id: users.id });
         });
     })
     .delete((req, res) => {
