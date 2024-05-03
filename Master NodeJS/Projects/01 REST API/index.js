@@ -1,12 +1,16 @@
 const express = require("express");
 const users = require("./MOCK_DATA.json");
+const fs = require("fs");
 
 const app = express();
 
 const PORT = 8000;
 
+// Middleware
+app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies (with support for arrays)
+
 // Routes
-app.get("/", function (req, res) {
+app.get("/", (req, res) => {
     res.send("HI");
 });
 
@@ -32,17 +36,34 @@ app.route("/api/users/:id")
 
         res.json(user);
     })
-    .post((req, res) => {
-        // Create a new User
-        res.send({ ststus: "Created" });
-    })
     .patch((req, res) => {
         // Update an existing User
-        res.send({ status: "Updated" });
+        const body = req.body;
+        users.push({...body });
+
+        fs.writeFile("./MOCK_DATA.json", JSON.stringify(users), (err, data) => {
+            res.json({ status: "Updated", id: users.id});
+        });
     })
     .delete((req, res) => {
         // Delete the specified user
-        res.send({ ststus: "Deleted" });
+        fs.writeFile("./MOCK_DATA.json", JSON.stringify(users), (err, data) => {
+            res.json({ status: "Deleted" });
+        });
     });
+
+app.post("/api/users", (req, res) => {
+    // Create a new User
+    const body = req.body;
+    // console.log("Body", body);
+    users.push({
+        id: users.length + 1,
+        ...body,
+    });
+
+    fs.writeFile("./MOCK_DATA.json", JSON.stringify(users), (err, data) => {
+        res.json({ status: "Created", id: users.length });
+    });
+});
 
 app.listen(PORT, console.log(`Server is listening on PORT ${PORT}`));
