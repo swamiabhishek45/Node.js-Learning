@@ -1,10 +1,49 @@
 const express = require("express");
-const users = require("./MOCK_DATA.json");
+const mongoose = require("mongoose");
 const fs = require("fs");
 
-const app = express();
+const users = require("./MOCK_DATA.json");
 
+const app = express();
 const PORT = 8000;
+
+// MongoDB Connection
+mongoose
+    .connect("mongodb://127.0.0.1:27017/nodejs")
+    .then(() => {
+        console.log("MongoDB Connected!!!");
+    })
+    .catch((err) => {
+        console.log("MongoDB Connnection Error!!", err);
+    });
+
+// Schema
+const userSchema = new mongoose.Schema(
+    {
+        firstName: {
+            type: String,
+            required: true,
+        },
+        lastName: {
+            type: String,
+        },
+        email: {
+            type: String,
+            required: true,
+            unique: true,
+        },
+        gender: {
+            type: String,
+        },
+        jobTitle: {
+            type: String,
+        },
+    },
+    { timestamps: true }
+);
+
+// Model
+const User = mongoose.model("user", userSchema);
 
 // Middleware
 app.use(express.urlencoded({ extended: false })); // Parse URL-encoded bodies (with support for arrays)
@@ -30,11 +69,12 @@ app.get("/api/users", (req, res) => {
     return res.json(users);
 });
 
-app.get("/users", (req, res) => {
+app.get("/users", async(req, res) => {
+    const allDBusers = await User.find({});
     const html = `
     <h1>All Users First Name</h1>
     <ul>
-        ${users.map((user) => `<li>${user.first_name}</li>`).join("")}
+        ${allDBusers.map((user) => `<li>${user.firstName}</li>`).join("")}
     </ul>
     `;
 
@@ -64,22 +104,24 @@ app.route("/api/users/:id")
         });
     });
 
-app.post("/api/users", (req, res) => {
+app.post("/api/users", async (req, res) => {
     // Create a new User
     const body = req.body;
 
     if (!body || !body.email) {
         return res.status(400).json({ error: "Missing email" });
     }
-    // console.log("Body", body);
-    users.push({
-        id: users.length + 1,
-        ...body,
-    });
 
-    fs.writeFile("./MOCK_DATA.json", JSON.stringify(users), (err, data) => {
-        res.status(201).json({ status: "Created", id: users.length });
+    const result = User.create({
+        firstName: body.first_name,
+        lastName: body.last_name,
+        email: body.email,
+        gender: body.gender,
+        jobTitle: body.job_title,
     });
+    console.log("result", result);
+
+    res.status(201).json({ msg: "User successfully created" });
 });
 
 app.listen(PORT, console.log(`Server is listening on PORT ${PORT}`));
