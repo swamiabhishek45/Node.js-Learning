@@ -25,6 +25,8 @@ app.get("/", (req, res) => {
 });
 
 app.get("/api/users", (req, res) => {
+    // custom header
+    res.setHeader("myName", "Abhishek");
     return res.json(users);
 });
 
