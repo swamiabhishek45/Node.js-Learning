@@ -45,7 +45,7 @@ app.route("/api/users/:id")
     .get((req, res) => {
         const id = Number(req.params.id);
         const user = users.find((user) => user.id === id);
-
+        if (!user) return res.status(404).json({ error: "Not found" });
         res.json(user);
     })
     .patch((req, res) => {
@@ -67,6 +67,10 @@ app.route("/api/users/:id")
 app.post("/api/users", (req, res) => {
     // Create a new User
     const body = req.body;
+
+    if (!body || !body.email) {
+        return res.status(400).json({ error: "Missing email" });
+    }
     // console.log("Body", body);
     users.push({
         id: users.length + 1,
@@ -74,7 +78,7 @@ app.post("/api/users", (req, res) => {
     });
 
     fs.writeFile("./MOCK_DATA.json", JSON.stringify(users), (err, data) => {
-        res.json({ status: "Created", id: users.length });
+        res.status(201).json({ status: "Created", id: users.length });
     });
 });
 
