@@ -9,6 +9,16 @@ const PORT = 8000;
 // Middleware
 app.use(express.urlencoded({ extended: false })); // Parse URL-encoded bodies (with support for arrays)
 
+app.use((req, res, next) => {
+    fs.appendFile(
+        "log.txt",
+        `${Date.now()}: ${req.method} - ${req.path} \n`,
+        (err, data) => {
+            next();
+        }
+    );
+});
+
 // Routes
 app.get("/", (req, res) => {
     res.send("HI");
