@@ -7,7 +7,7 @@ const app = express();
 const PORT = 8000;
 
 // Middleware
-app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies (with support for arrays)
+app.use(express.urlencoded({ extended: false })); // Parse URL-encoded bodies (with support for arrays)
 
 // Routes
 app.get("/", (req, res) => {
