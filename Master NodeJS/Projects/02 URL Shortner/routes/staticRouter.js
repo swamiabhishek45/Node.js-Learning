@@ -1,8 +1,11 @@
 import express from 'express';
+import URL from '../models/url.model.js'
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get('/url', async(req, res) => {
+    // const allurls = await URL.find({})
+    console.log("urls",allurls);
     return res.render('home');
 })
 

@@ -10,8 +10,12 @@ export async function handleGenerateNewShortURL(req, res) {
         redirectURL: body.url,
         visitHistory: [],
     });
-
-    return res.status(201).json({ Id: shortID });
+    const allurls = await URL.find({});
+    return res.render("home", {
+        id: shortID,
+        urls: allurls,
+    });
+    // return res.status(201).json({ Id: shortID });
 }
 
 export async function handleGetShortURL(req, res) {
