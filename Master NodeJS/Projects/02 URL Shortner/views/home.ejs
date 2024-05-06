@@ -17,13 +17,15 @@
             <input type="text" name="url" placeholder="https://example.com" />
             <button type="submit">Generate</button>
         </form>
-
+<br>
         <% if (locals.id) { %>
         <p>
             Shortened URL -
             <a href="/url/<%= locals.id %>">http://localhost:8000/<%= id %></a>
         </p>
-        <% } %> <% if (locals.urls) { %>
+        <% } %> 
+        <hr>
+        <% if (locals.urls) { %>
         <table>
             <thead>
                 <th>Sr. No</th>
@@ -31,6 +33,7 @@
                 <th>Redirect</th>
                 <th>Clicks</th>
             </thead>
+            
             <tbody>
                 <% urls.forEach((url, index) => { %>
                 <tr>

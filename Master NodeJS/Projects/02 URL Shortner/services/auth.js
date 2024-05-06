@@ -1,9 +1,9 @@
 const sessionIdToUserMap = new Map();
 
 export function setUser(id, user){
-    sessionIdToUserMap.set(id, user);
+    return sessionIdToUserMap.set(id, user);
 }
 
 export function getUser(id){
-    sessionIdToUserMap.get(id);
+    return sessionIdToUserMap.get(id);
 }

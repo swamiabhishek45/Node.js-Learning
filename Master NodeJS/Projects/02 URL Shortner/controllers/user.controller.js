@@ -1,6 +1,6 @@
 import User from "../models/user.model.js";
 import { v4 as uuidv4 } from "uuid";
-import { setUser, getUser } from "../services/auth.js";
+import { setUser } from "../services/auth.js";
 
 export async function handleUserSignup(req, res) {
     const { name, email, password } = req.body;
