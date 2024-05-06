@@ -15,7 +15,6 @@ export async function handleGenerateNewShortURL(req, res) {
         id: shortID,
         urls: allurls,
     });
-    // return res.status(201).json({ Id: shortID });
 }
 
 export async function handleGetShortURL(req, res) {
