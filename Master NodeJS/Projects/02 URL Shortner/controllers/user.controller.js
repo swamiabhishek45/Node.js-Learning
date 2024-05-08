@@ -25,10 +25,6 @@ export async function handleUserLogin(req, res) {
         });
 
     const token = setUser(user);
-    // 1) Cookie
-    // res.cookie('uid', token);
-    // return res.redirect("/");
-
-    // 2) Response
-    return res.json({token});
+    res.cookie('token', token);
+    return res.redirect("/");
 }

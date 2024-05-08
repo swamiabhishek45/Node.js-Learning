@@ -3,8 +3,8 @@ import connectDB from "./connection.js";
 import path from "path";
 import cookieParser from "cookie-parser";
 import {
-    restrictToLoggedinUserOnly,
-    checkAuth,
+    checkForAuth,
+    restrictTo,
 } from "./middlewares/auth.middleware.js";
 
 import urlRoute from "./routes/url.js";
@@ -24,10 +24,11 @@ connectDB("mongodb://127.0.0.1:27017/URL").then(() => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(checkForAuth)
 
-app.use("/url", restrictToLoggedinUserOnly, urlRoute);
-app.use("/",checkAuth, staticRoute);
+app.use("/url", restrictTo(["NORMAL"]), urlRoute);
 app.use("/user", userRoute);
+app.use("/", staticRoute);
 
 app.listen(PORT, () => {
     console.log(`Server is listening on PORT ${PORT}`);
