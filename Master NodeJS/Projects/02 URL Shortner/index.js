@@ -2,10 +2,7 @@ import express from "express";
 import connectDB from "./connection.js";
 import path from "path";
 import cookieParser from "cookie-parser";
-import {
-    checkForAuth,
-    restrictTo,
-} from "./middlewares/auth.middleware.js";
+import { checkForAuth, restrictTo } from "./middlewares/auth.middleware.js";
 
 import urlRoute from "./routes/url.js";
 import staticRoute from "./routes/staticRouter.js";
@@ -17,14 +14,18 @@ const PORT = 8000;
 app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"));
 
-connectDB("mongodb://127.0.0.1:27017/URL").then(() => {
-    console.log("MongoDB Connected!");
-});
+connectDB("mongodb://127.0.0.1:27017/URL")
+    .then(() => {
+        console.log("MongoDB Connected!");
+    })
+    .catch((error) => {
+        console.log("ERROR!!!", error);
+    });
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(checkForAuth)
+app.use(checkForAuth);
 
 app.use("/url", restrictTo(["NORMAL", "ADMIN"]), urlRoute);
 app.use("/user", userRoute);
